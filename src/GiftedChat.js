@@ -384,7 +384,7 @@ class GiftedChat extends React.Component {
          composerHeight: MIN_COMPOSER_HEIGHT,
          messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
        });
-  }
+  })
   }
 
   onMainViewLayout(e) {
