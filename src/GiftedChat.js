@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Animated,
   Platform,
+  InteractionManager,
   StyleSheet,
   View,
 } from 'react-native';
@@ -376,12 +377,14 @@ class GiftedChat extends React.Component {
     this.setMaxHeight(layout.height);
     const newComposerHeight = MIN_COMPOSER_HEIGHT;
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(newComposerHeight);
-    this.setState({
-      isInitialized: true,
-      text: '',
-      composerHeight: newComposerHeight,
-      messagesContainerHeight: this.prepareMessagesContainerHeight(newMessagesContainerHeight),
-    });
+     InteractionManager.runAfterInteractions(() => {
+      this.setState({
+         isInitialized: true,
+         text: '',
+         composerHeight: MIN_COMPOSER_HEIGHT,
+         messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
+       });
+  }
   }
 
   onMainViewLayout(e) {
